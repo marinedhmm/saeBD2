@@ -4,15 +4,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Rapport sae bd</title>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="assets/style.css">
 
     </head>
     <body class="grid">
         <header>Equipe</header>
         <nav>
             <ul class="menu">
-                <li><a href="#">equipe</a></li>
-                <li><a href="requete.html">requetes</a></li>
+                <li><a class="navi" href="accueil.html">accueil</a></li>
+                <li><a class="navi" href="equipe.html">equipe</a></li>
+                <li><a class="navi" href="requete.html">requetes</a></li>
             </ul>
         </nav>
         <main>
@@ -27,9 +28,30 @@
 
             </article>
             <article class="personne">
-                <img class="img-personne" src="image" alt="Marine" height="300" width="400">
-                <p class="personne-description">Marine Duhem</p>
+                <h1>Marine Duhem</h1>
+                <p class="personne-description">112</p>
+                <img class="img-personne" src="assets/images/reqpersomarine.png" alt="Marine" >
+                <pre><code>
+SELECT TOP 10 Pays.PaysFR AS Pays,
+       SUM(DetailCommande.Quantité * Produit.CoutAchat
+       * Categorie.CoefMarge
+       * (1 - DetailCommande.[Remise (%)])) AS CA
+FROM (((DetailCommande
+INNER JOIN Produit
+ON Produit.RefProd = DetailCommande.[Réf produit])
+INNER JOIN Categorie
+ON Produit.CodeCateg = Categorie.CodeCateg)
+INNER JOIN Fournisseur
+ON Produit.NoFour = Fournisseur.NoFour)
+INNER JOIN Pays
+ON Fournisseur.NoPays = Pays.NoPays
+GROUP BY Pays.PaysFR
+ORDER BY SUM(DetailCommande.Quantité * Produit.CoutAchat
+       * Categorie.CoefMarge
+       * (1 - DetailCommande.[Remise (%)]))  DESC;
 
+    </code></pre>
+                <p class="requette-description">Quels sont les 10 pays fournisseurs qui génèrent le plus de chiffre d'affaires ?</p>
             </article>
         </main>
         <footer>&copy; 2026 - équipe BD</footer>
