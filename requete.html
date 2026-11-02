@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Rapport sae bd</title>
+        <link rel="stylesheet" href="css/style.css">
+
+    </head>
+    <body class="grid">
+        <header>Requetes</header>
+        <nav>
+            <ul class="menu">
+                <li><a href="equipe.html">equipe</a></li>
+                <li><a href="#">requetes</a></li>
+            </ul>
+        </nav>
+        <main>
+            <article class="requete-article">
+                <h1>Requete A</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+SELECT CodeCli, Societe, Contact, Adresse, Ville, CodePostal, Tel, MailCli
+FROM Clientele
+Where Ville like 'Paris'
+Order by Societe;
+    </code></pre>
+                <p class="requette-description">On veut vérifier les coordonnées des clients parisiens : liste triée par société</p>
+
+            </article>
+
+
+            <article class="requete-article">
+                <h1>Requete B</h1>
+            <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+            <pre><code>
+SELECT Produit.NomProd,
+       Produit.CoutAchat,
+       Fournisseur.Societe,
+       Fournisseur.Ville
+FROM Produit
+INNER JOIN Fournisseur
+    ON Produit.NoFour = Fournisseur.NoFour
+WHERE Fournisseur.NoPays IN (
+    SELECT Pays.NoPays
+    FROM Pays
+    WHERE Pays.PaysFR = 'Etats-Unis'
+)
+AND Produit.CoutAchat < 25;
+    </code></pre>
+            <p class="requette-description">Quels sont les produits de provenance des Etats-Unis avec un cout de moins de 25€ ? On
+                veut les connaître noms et prix, nom du fournisseur et ville</p>
+
+        </article>
+
+
+            <article class="requete-article">
+                <h1>Requete C</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+SELECT Produit.NomProd,
+       Produit.CoutAchat,
+       Fournisseur.Societe,
+       Fournisseur.Ville
+FROM Produit
+INNER JOIN Fournisseur
+    ON Produit.NoFour = Fournisseur.NoFour
+WHERE Produit.CodeCateg IN (SELECT CodeCateg
+    FROM Categorie
+    WHERE NomCateg LIKE 'Viandes' OR NomCateg LIKE 'Poissons*');
+    </code></pre>
+                <p class="requette-description">Quels sont les produits (avec fournisseur et pays de provenance) de catégorie viandes ou
+                    poissons ayant un coût d’achat de plus de 50€ ?
+                </p>
+
+            </article>
+
+
+            <article class="requete-article">
+                <h1>Requete D</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+SELECT NoFour, Societe, Ville
+FROM Fournisseur
+WHERE NoFour IN (SELECT NoFour
+    FROM Produit
+    WHERE CodeCateg IN (SELECT CodeCateg
+        FROM Categorie
+        WHERE NomCateg LIKE 'Viandes' OR NomCateg LIKE 'Poissons*'));
+    </code></pre>
+                <p class="requette-description">Quels fournisseurs proposent de la viande ou du poisson ?
+                </p>
+
+            </article>
+
+
+            <article class="requete-article">
+                <h1>Requete E</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+SELECT NoFour, Societe, Ville
+FROM Fournisseur
+WHERE NoFour IN (
+    SELECT NoFour
+    FROM Produit
+    WHERE CodeCateg IN (
+        SELECT CodeCateg
+        FROM Categorie
+        WHERE NomCateg LIKE 'Viandes'
+    )
+)
+AND NoFour IN (
+    SELECT NoFour
+    FROM Produit
+    WHERE CodeCateg IN (
+        SELECT CodeCateg
+        FROM Categorie
+        WHERE NomCateg LIKE 'Poissons*'
+    )
+);
+    </code></pre>
+                <p class="requette-description">Quels fournisseurs proposent de la viande et du poisson ?
+                </p>
+
+            </article>
+            <article class="requete-article">
+                <h1>Requete F</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+SELECT NomProd, CoutAchat
+FROM Produit
+WHERE QteParUnit LIKE '*carton*'
+    OR QteParUnit LIKE '*verre*';
+
+    </code></pre>
+                <p class="requette-description">Quels sont les produits conditionnés dans du carton ou dans du verre ?
+                </p>
+
+            </article>
+
+
+            <article class="requete-article">
+                <h1>Requete G</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+SELECT TOP 3 [N° commande], DateCde
+FROM Commande
+WHERE CodeCli IN (
+    SELECT CodeCli
+    FROM Clientele
+    WHERE Contact LIKE 'Max Deschamps'
+)
+ORDER BY DateCde DESC;
+    </code></pre>
+                <p class="requette-description">Donner les 3 dernières commandes du client Max Deschamps ?</p>
+
+            </article>
+            <article class="requete-article">
+                <h1>Requete H</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+SELECT NoFour, Societe
+FROM Fournisseur
+WHERE NoFour IN ( SELECT NoFour
+FROM Produit
+WHERE CodeCateg IN ( SELECT CodeCateg
+FROM Categorie
+WHERE NomCateg LIKE '*Dessert*'))
+AND NoFour NOT IN (SELECT NoFour
+FROM Produit
+WHERE CodeCateg IN (SELECT CodeCateg
+FROM Categorie
+WHERE NomCateg NOT LIKE '*Dessert*'));
+    </code></pre>
+                <p class="requette-description">Quels fournisseurs ne proposent que des desserts ?
+                </p>
+
+            </article>
+
+
+            <article class="requete-article">
+                <h1>Requete I</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+SELECT NoFour, Societe
+FROM Fournisseur
+WHERE NoFour NOT IN (SELECT DISTINCT NoFour
+FROM Produit
+ORDER BY NoFour)
+AND NoPays NOT IN (SELECT NoPays
+FROM Pays
+WHERE PaysFR = 'France');
+
+    </code></pre>
+                <p class="requette-description"> Quels fournisseurs hors France n’ont pas encore de produits au catalogue de Kdou ?
+                </p>
+
+            </article>
+
+
+            <article class="requete-article">
+                <h1>Requete J</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+SELECT C1.CodeCli, C2.CodeCli
+FROM Clientele AS C1
+INNER JOIN Clientele AS C2
+ON C1.CodeCli < C2.CodeCli
+WHERE C1.Ville = 'Paris'
+AND C2.Ville = 'Paris';
+
+    </code></pre>
+                <p class="requette-description">Pour optimiser les livraisons, on veut savoir quels couples de clients sont situés à Paris.
+                </p>
+
+            </article>
+            <article class="requete-article">
+                <h1>Requete 2</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+SELECT SUM(DetailCommande.Quantité * Produit.CoutAchat * Categorie.CoefMarge * (1 - DetailCommande.[Remise (%)])) AS CA
+FROM (DetailCommande
+INNER JOIN Produit ON Produit.RefProd = DetailCommande.[Réf produit])
+INNER JOIN Categorie ON Produit.CodeCateg = Categorie.CodeCateg
+WHERE Produit.NoFour IN (SELECT NoFour
+FROM Fournisseur
+WHERE NoPays IN (SELECT NoPays
+FROM Pays
+WHERE UE = 'Membre'));
+
+    </code></pre>
+                <p class="requette-description">Dans une réflexion en lien avec l’origine de ses produits : On veut comme indicateur le CA
+                    total généré à ce jour avec les fournisseurs de l’UE ?</p>
+
+            </article>
+
+
+            <article class="requete-article">
+                <h1>Requete 3</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+SELECT YEAR(Commande.DateCde) AS Annee,
+       SUM(DetailCommande.Quantité * Produit.CoutAchat
+       * Categorie.CoefMarge
+       * (1 - DetailCommande.[Remise (%)])) AS CA
+FROM ((DetailCommande
+INNER JOIN Produit
+ON Produit.RefProd = DetailCommande.[Réf produit])
+INNER JOIN Categorie
+ON Produit.CodeCateg = Categorie.CodeCateg)
+INNER JOIN Commande
+ON DetailCommande.[N° commande] = Commande.[N° commande]
+WHERE Categorie.NomCateg LIKE '*Dessert*'
+   OR Categorie.NomCateg LIKE '*Boisson*'
+GROUP BY YEAR(Commande.DateCde)
+ORDER BY YEAR(Commande.DateCde);
+    </code></pre>
+                <p class="requette-description"> Dans une réflexion en lien avec la santé : On veut comme indicateur le chiffre d’affaire
+                    généré (montant total des ventes) annuel pour les catégories desserts ou boissons. </p>
+
+            </article>
+
+
+            <article class="requete-article">
+                <h1>Requete 4</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+SELECT COUNT(*) AS [Carné non commandé]
+FROM Produit
+WHERE CodeCateg IN (SELECT CodeCateg
+    FROM Categorie
+    WHERE NomCateg LIKE '*Viande*')
+AND RefProd NOT IN (SELECT DISTINCT [Réf produit]
+    FROM DetailCommande
+    ORDER BY [Réf produit]);
+
+    </code></pre>
+                <p class="requette-description">Dans une réflexion en lien avec l’offre commerciale : Calcul de l’indicateur nombre de
+                    produits carnés non commandés actuellement ?
+                </p>
+
+            </article>
+            <article class="requete-article">
+                <h1>Requete 5</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <h6>requete enregistré sous NbCommandesClient</h6>
+                <pre><code>
+SELECT CodeCli, COUNT(*) AS NbCommandes
+FROM Commande
+GROUP BY CodeCli;
+   </code></pre>
+                <h6>requete finale</h6>
+                <pre><code>
+SELECT Pilote.CodeCli AS Pilote, Pil.NbCommandes,
+       Partenaire.CodeCli AS Partenaire,
+       Part.NbCommandes
+FROM ((Clientele AS Pilote
+INNER JOIN Clientele AS Partenaire
+ON Pilote.CodeCli = Partenaire.CodeCliPart)
+INNER JOIN NbCommandesClient AS Part
+ON Partenaire.CodeCli = Part.CodeCli)
+INNER JOIN NbCommandesClient AS Pil
+ON Pilote.CodeCli = Pil.CodeCli
+WHERE Pil.NbCommandes = Part.NbCommandes;
+    </code></pre>
+                <p class="requette-description"> Dans une réflexion sur le partenariat client : A-t-on des clients pilotes d’un réseau
+                    partenaire ayant autant de commandes que les clients partenaires ?</p>
+
+            </article>
+            <article class="requete-article">
+                <h1>Requete Personnelle ASSA</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+
+    </code></pre>
+                <p class="requette-description">a</p>
+
+            </article>
+            <article class="requete-article">
+                <h1>Requete Personnelle DINA</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+
+    </code></pre>
+                <p class="requette-description">a</p>
+
+            </article>
+            <article class="requete-article">
+                <h1>Requete Personnelle MARINE</h1>
+                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <pre><code>
+
+    </code></pre>
+                <p class="requette-description">a</p>
+
+            </article>
+        </main>
+        <footer>&copy; 2026 - Requetes BD</footer>
+    </body>
+</html>
