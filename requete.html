@@ -4,21 +4,22 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Rapport sae bd</title>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="assets/style.css">
 
     </head>
     <body class="grid">
-        <header>Requetes</header>
+        <header>Requêtes</header>
         <nav>
             <ul class="menu">
-                <li><a href="equipe.html">equipe</a></li>
-                <li><a href="#">requetes</a></li>
+                <li><a class="navi" href="accueil.html">accueil</a></li>
+                <li><a class="navi" href="equipe.html">equipe</a></li>
+                <li><a class="navi" href="requete.html">requetes</a></li>
             </ul>
         </nav>
         <main>
             <article class="requete-article">
                 <h1>Requete A</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/req1.png" alt="requete1" >
                 <pre><code>
 SELECT CodeCli, Societe, Contact, Adresse, Ville, CodePostal, Tel, MailCli
 FROM Clientele
@@ -32,7 +33,7 @@ Order by Societe;
 
             <article class="requete-article">
                 <h1>Requete B</h1>
-            <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+            <img class="requette-tableau" src="assets/images/reqb.png" alt="requete1" >
             <pre><code>
 SELECT Produit.NomProd,
        Produit.CoutAchat,
@@ -56,7 +57,7 @@ AND Produit.CoutAchat < 25;
 
             <article class="requete-article">
                 <h1>Requete C</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/reqc.png" alt="requete1">
                 <pre><code>
 SELECT Produit.NomProd,
        Produit.CoutAchat,
@@ -78,7 +79,7 @@ WHERE Produit.CodeCateg IN (SELECT CodeCateg
 
             <article class="requete-article">
                 <h1>Requete D</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/reqd.png" alt="requete1" >
                 <pre><code>
 SELECT NoFour, Societe, Ville
 FROM Fournisseur
@@ -96,7 +97,7 @@ WHERE NoFour IN (SELECT NoFour
 
             <article class="requete-article">
                 <h1>Requete E</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/reqe.png" alt="requete1" >
                 <pre><code>
 SELECT NoFour, Societe, Ville
 FROM Fournisseur
@@ -125,7 +126,7 @@ AND NoFour IN (
             </article>
             <article class="requete-article">
                 <h1>Requete F</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/reqf.png" alt="requete1">
                 <pre><code>
 SELECT NomProd, CoutAchat
 FROM Produit
@@ -141,7 +142,7 @@ WHERE QteParUnit LIKE '*carton*'
 
             <article class="requete-article">
                 <h1>Requete G</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/reqg.png" alt="requete1" >
                 <pre><code>
 SELECT TOP 3 [N° commande], DateCde
 FROM Commande
@@ -157,7 +158,7 @@ ORDER BY DateCde DESC;
             </article>
             <article class="requete-article">
                 <h1>Requete H</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/reqh.png" alt="requete1" >
                 <pre><code>
 SELECT NoFour, Societe
 FROM Fournisseur
@@ -180,7 +181,7 @@ WHERE NomCateg NOT LIKE '*Dessert*'));
 
             <article class="requete-article">
                 <h1>Requete I</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/reqi.png" alt="requete1" >
                 <pre><code>
 SELECT NoFour, Societe
 FROM Fournisseur
@@ -200,7 +201,7 @@ WHERE PaysFR = 'France');
 
             <article class="requete-article">
                 <h1>Requete J</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/reqj.png" alt="requete1" >
                 <pre><code>
 SELECT C1.CodeCli, C2.CodeCli
 FROM Clientele AS C1
@@ -216,7 +217,7 @@ AND C2.Ville = 'Paris';
             </article>
             <article class="requete-article">
                 <h1>Requete 2</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/req 2.png" alt="requete1" >
                 <pre><code>
 SELECT SUM(DetailCommande.Quantité * Produit.CoutAchat * Categorie.CoefMarge * (1 - DetailCommande.[Remise (%)])) AS CA
 FROM (DetailCommande
@@ -237,7 +238,7 @@ WHERE UE = 'Membre'));
 
             <article class="requete-article">
                 <h1>Requete 3</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/req3.png" alt="requete1" >
                 <pre><code>
 SELECT YEAR(Commande.DateCde) AS Annee,
        SUM(DetailCommande.Quantité * Produit.CoutAchat
@@ -263,7 +264,7 @@ ORDER BY YEAR(Commande.DateCde);
 
             <article class="requete-article">
                 <h1>Requete 4</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/req4.png" alt="requete1" >
                 <pre><code>
 SELECT COUNT(*) AS [Carné non commandé]
 FROM Produit
@@ -282,7 +283,7 @@ AND RefProd NOT IN (SELECT DISTINCT [Réf produit]
             </article>
             <article class="requete-article">
                 <h1>Requete 5</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="assets/images/req5.png" alt="requete1" >
                 <h6>requete enregistré sous NbCommandesClient</h6>
                 <pre><code>
 SELECT CodeCli, COUNT(*) AS NbCommandes
@@ -309,7 +310,7 @@ WHERE Pil.NbCommandes = Part.NbCommandes;
             </article>
             <article class="requete-article">
                 <h1>Requete Personnelle ASSA</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="image" alt="requete1" >
                 <pre><code>
 
     </code></pre>
@@ -318,7 +319,7 @@ WHERE Pil.NbCommandes = Part.NbCommandes;
             </article>
             <article class="requete-article">
                 <h1>Requete Personnelle DINA</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="image" alt="requete1" >
                 <pre><code>
 
     </code></pre>
@@ -327,7 +328,7 @@ WHERE Pil.NbCommandes = Part.NbCommandes;
             </article>
             <article class="requete-article">
                 <h1>Requete Personnelle MARINE</h1>
-                <img class="requette-tableau" src="image" alt="requete1" height="300" width="400">
+                <img class="requette-tableau" src="image" alt="requete1" >
                 <pre><code>
 
     </code></pre>
