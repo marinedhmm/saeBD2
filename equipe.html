@@ -58,8 +58,7 @@ ORDER BY SUM(DetailCommande.Quantité * Produit.CoutAchat
             <h2>Assa Fofana</h2>
         </div>
         <h3 class="question-requete">Quel chiffre d&#x27;affaires chaque catégorie de produits génère-t-elle ?</h3>
-        <p class="requete-description">Calculer la proportion (en pourcentage) du chiffre d&#x27;affaires total de l&#x27;entreprise KDou générée spécifiquement par la vente de produits provenant de fournisseurs français
-            par rapport au chiffre d&#x27;affaires global.</p>
+        <p class="requete-description">Calculer la part du chiffre d&#x27affaires total généré spécifiquement par les fournisseurs français afin de mesurer l&#x27importance des fournisseurs français pour l&#x27entreprise KDou.</p>
         <h4>Code SQL</h4>
         <pre><code>SELECT ( SUM(IIf(
     pa.PaysFR = 'France',
