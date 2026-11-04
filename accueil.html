@@ -3,33 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rapport sae bd</title>
+    <title>Accueil | SAÉ Base de données</title>
     <link rel="stylesheet" href="assets/style.css">
-
 </head>
 <body class="grid">
-<header>Accueil</header>
-<nav>
-    <ul class="menu">
-        <li><a class="navi" href="accueil.html">accueil</a></li>
-        <li><a class="navi" href="equipe.html">equipe</a></li>
-        <li><a class="navi" href="requete.html">requetes</a></li>
-    </ul>
-</nav>
+<header><div class="entete-contenu"><h1>Accueil</h1><p>Rapport de SAÉ - Base de données</p></div></header>
+<nav aria-label="Navigation principale"><ul class="menu"><li><a class="navi actif" href="accueil.html" aria-current="page">Accueil</a></li>
+    <li><a class="navi" href="equipe.html">Équipe</a></li>
+    <li><a class="navi" href="requete.html">Requêtes</a></li></ul></nav>
 <main>
-    <div class="acceuil">
-        <h1>Rapport de notre SAE de Base de donnée.</h1>
-        <a  href="requete.html"><article class="onglet">
-            <h2>Onglet requetes</h2>
-            <p>Vous retrouverez ici l'ensemble de nos requêtes principal. De la requête 1 à 5.</p>
-        </article></a>
-
-        <a  href="equipe.html"><article class="onglet">
-        <h2>onglet equipe</h2>
-        <p>Pour chaque membre de notre équipe, vous pourrez retrouver ici nos requêtes personnels.</p>
-        </article></a>
-    </div>
+    <section class="intro accueil">
+        <p class="sur-titre">Notre projet</p>
+        <h2>Explorer les données de KDou</h2>
+        <p>Bienvenue dans notre rapport de SAÉ consacré aux bases de données. À travers différentes requêtes SQL réalisées sur Microsoft Access, nous analysons les données de l'entreprise KDou.</p>
+    </section>
+    <section class="cartes-accueil" aria-label="Découvrir le rapport">
+        <a class="onglet" href="requete.html">
+            <span class="icone-carte" aria-hidden="true">⌘</span>
+            <h2>Nos requêtes</h2>
+            <p>Découvrez les requêtes SQL, leurs objectifs et les résultats obtenus.</p>
+            <span class="lien-carte">Voir les requêtes →</span>
+        </a>
+        <a class="onglet" href="equipe.html">
+            <span class="icone-carte" aria-hidden="true">◎</span>
+            <h2>Notre équipe</h2>
+            <p>Retrouvez les membres du groupe et les requêtes personnelles réalisées.</p>
+            <span class="lien-carte">Découvrir l'équipe →</span>
+        </a>
+    </section>
 </main>
-<footer>&copy; 2026 - équipe BD</footer>
+<footer>&copy; 2026 — Équipe BD - SAÉ Base de données</footer>
 </body>
 </html>
