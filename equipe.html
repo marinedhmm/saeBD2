@@ -17,9 +17,28 @@
             </ul>
         </nav>
         <main>
-            <article class="personne">
-                <img class="img-personne" src="image" alt="DINA" height="300" width="400">
-                <p class="personne-description">Dina Selmi</p>
+             <article class="personne">
+                <h1>Dina Selmi</h1>
+                <p class="personne-description">112</p>
+                <img class="img-personne" src="assets/images/reqpersodina.png" alt="DINA" >
+                <pre><code>
+SELECT Categorie.NomCateg,
+SUM(DetailCommande.Quantité * Produit.CoutAchat
+* Categorie.CoefMarge
+* (1 - DetailCommande.[Remise (%)])) AS CA
+FROM (DetailCommande
+INNER JOIN Produit
+ON Produit.RefProd = DetailCommande.[Réf produit])
+INNER JOIN Categorie
+ON Produit.CodeCateg = Categorie.CodeCateg
+GROUP BY Categorie.NomCateg
+ORDER BY SUM(DetailCommande.Quantité * Produit.CoutAchat
+* Categorie.CoefMarge
+* (1 - DetailCommande.[Remise (%)])) DESC
+                    
+    </code></pre>
+                <p class="requette-description">Quelles sont les catégories de produits qui génèrent le plus de chiffre d’affaires ?</p>
+            </article>
 
             </article>
             <article class="personne">
